@@ -20,8 +20,8 @@ Chaque ligne de l'entree represente un sommet, avec, par exemple:
 
 qui represente un graphe $G = (V, E)$ tq $G = \{A, B, C\}$ et $V = \{(A, B), (A, C), (B, C), (C, A)\}$.
 
-** TODO TODO [0/3]
+** TODO TODO [1/3]
 
-- [ ] Implementer l'algorithme
+- [X] Implementer l'algorithme
 - [ ] Obtenir les tableaux =pre= et =post=
 - [ ] Entree / Sortie (lecture graphe.txt)
