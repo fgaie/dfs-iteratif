@@ -1,5 +1,7 @@
 * DFS interatif
 
+Version iterative d'un parcours en profondeur sur un graphe oriente.
+
 ** Utilisation
 
 #+begin_src sh
@@ -20,8 +22,8 @@ Chaque ligne de l'entree represente un sommet, avec, par exemple:
 
 qui represente un graphe $G = (V, E)$ tq $G = \{A, B, C\}$ et $V = \{(A, B), (A, C), (B, C), (C, A)\}$.
 
-** TODO TODO [2/3]
+** DONE TODOs [3/3]
 
 - [X] Implementer l'algorithme
-- [ ] Obtenir les tableaux =pre= et =post=
+- [X] Obtenir les tableaux =pre= et =post=
 - [X] Entree / Sortie (lecture graphe.txt)
