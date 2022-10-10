@@ -2,58 +2,52 @@
 
 from dataclasses import dataclass
 
-# On represente un graphe avec une list d'adjacence (ex: 1 -> 2 => [[2], []])
-Sommet = int
-Graphe = list[list[Sommet]]
+@dataclass(frozen=True)
+class Sommet:
+    name: int
+
+    def __str__(self) -> str:
+        return str(self.name)
+
+# On represente un graphe avec une list d'adjacence (ex: 1 -> 2 => {1: [2], 2: []})
+Graphe = dict[Sommet, list[Sommet]]
 
 @dataclass
-class Counter:
+class _Counter:
     cur: int
-    def __call__(self):
+    def next(self):
+        tmp = self.cur
         self.cur += 1
-        return self.cur
+        return tmp
 
-def explorer(
+def _explorer(
         G: Graphe,
         u: Sommet,
-        marque: list[bool],
+        marque: dict[Sommet, bool],
 ) -> list[Sommet]:
     result: list[Sommet] = []
     pile: list[Sommet] = [u]
-    
+
     while pile: # not empty
         u = pile.pop()
-        
+
         if not marque[u]:
             marque[u] = True
-            result.append(u)
             pile.append(u)
+            result.append(u)
 
-        for v in sorted(G[u], reverse = True):
+        for v in sorted(G[u], key=lambda s: s.name, reverse=True):
             if not marque[v]:
                 pile.append(v)
-        
+
     return result
-            
+
 def dfs(G: Graphe) -> list[Sommet]:
-    marque = [False] * len(G)
-    result: [Sommet] = []
+    marque: dict[Sommet, bool] = {k: False for k in G.keys()}
+    resultat: list[Sommet] = []
 
-    for u in range(len(G)):
+    for u in G.keys():
         if not marque[u]:
-            result += explorer(G, u, marque)
+            resultat += _explorer(G, u, marque)
 
-    return result
-
-def main():
-    
-    G = [[4, 5], [1, 4, 6, 7], [3],    [2],
-         [8, 9], [10],         [],     [3],
-         [9],    [10],         [6, 8], [6, 7, 10]]
-
-    result = dfs(G)
-    intended_result = [0, 4, 8, 9, 10, 6, 5, 1, 7, 3, 2, 11]
-    print(f'{result = }\n{result == intended_result = }')
-
-if __name__ == '__main__':
-    main()
+    return resultat
